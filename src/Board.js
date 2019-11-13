@@ -1,5 +1,6 @@
 import React from "react";
 import Cell from "./Cell";
+import Menu from "./Menu";
 import "./Board.css";
 
 /** Game board of Lights out.
@@ -39,7 +40,7 @@ class Board extends React.Component {
     this.state = {
       level: 3,
       hasWon: false,
-      board: this.createBoard(5)
+      board: this.createBoard(3)
     };
     this.easy = this.easy.bind(this);
     this.med = this.med.bind(this);

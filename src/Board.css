@@ -44,7 +44,7 @@ table tr:last-child td:last-child {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px;
+  margin: 50px 0px;
 }
 .levels {
   display: flex;

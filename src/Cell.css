@@ -6,6 +6,7 @@
 }
 .Cell:hover {
   cursor: pointer;
+  border: 0.3px solid #00bcd4;
 }
 
 .Cell-lit {
@@ -19,5 +20,12 @@
     width: 60px;
     background-color: #263238;
     transition: background-color 0.7s ease;
+  }
+  .Cell:hover {
+    cursor: pointer;
+  }
+
+  .Cell-lit {
+    background-color: #00bcd4;
   }
 }
