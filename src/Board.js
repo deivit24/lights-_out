@@ -175,7 +175,7 @@ class Board extends React.Component {
     return (
       <div>
         <div className="board-Title">
-          <div className="neon">Lights</div> <div className="flux">Out</div>
+          <div className="neon">LIGHTS</div> <div className="flux">OUT</div>
         </div>
 
         <div className="levels">

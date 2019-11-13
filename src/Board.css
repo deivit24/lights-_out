@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Electrolize&display=swap");
+
 .Board {
   margin: 0 auto;
   border-radius: 25px;
@@ -78,14 +80,14 @@ table tr:last-child td:last-child {
 }
 
 .neon {
-  font-family: neon;
+  font-family: "Electrolize", sans-serif;
   color: #fb4264;
   font-size: 80px;
   text-shadow: 0 0 3vw #f40a35;
 }
 
 .flux {
-  font-family: neon;
+  font-family: "Electrolize", sans-serif;
   color: #426dfb;
   font-size: 80px;
   text-shadow: 0 0 3vw #2356ff;
@@ -135,14 +137,14 @@ table tr:last-child td:last-child {
 @media only screen and (max-width: 480px) {
   /* your CSS here */
   .neon {
-    font-family: neon;
+    font-family: "Electrolize", sans-serif;
     color: #fb4264;
     font-size: 50px;
     text-shadow: 0 0 3vw #f40a35;
   }
 
   .flux {
-    font-family: neon;
+    font-family: "Electrolize", sans-serif;
     color: #426dfb;
     font-size: 50px;
     text-shadow: 0 0 3vw #2356ff;
