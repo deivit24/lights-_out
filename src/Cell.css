@@ -4,6 +4,9 @@
   background-color: #263238;
   transition: background-color 0.7s ease;
 }
+.Cell:hover {
+  cursor: pointer;
+}
 
 .Cell-lit {
   background-color: #00bcd4;

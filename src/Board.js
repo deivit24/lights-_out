@@ -30,8 +30,6 @@ import "./Board.css";
 
 class Board extends React.Component {
   static defaultProps = {
-    nrows: 5,
-    ncols: 5,
     chanceLightStartsOn: 0.25
   };
   constructor(props) {
@@ -39,39 +37,81 @@ class Board extends React.Component {
 
     // TODO: set initial state
     this.state = {
+      level: 3,
       hasWon: false,
-      board: this.createBoard()
+      board: this.createBoard(5)
     };
+    this.easy = this.easy.bind(this);
+    this.med = this.med.bind(this);
+    this.hard = this.hard.bind(this);
+  }
+
+  easy() {
+    this.setState({
+      level: 2,
+      board: this.createBoard(2)
+    });
+  }
+  med() {
+    this.setState({
+      level: 3,
+      board: this.createBoard(3)
+    });
+  }
+  hard() {
+    this.setState({
+      level: 5,
+      board: this.createBoard(5)
+    });
   }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
 
-  createBoard() {
+  createBoard(n) {
     let board = [];
     // TODO: create array-of-arrays of true/false values
-    for (let y = 0; y < this.props.nrows; y++) {
-      let row = [];
-      for (let x = 0; x < this.props.ncols; x++) {
-        row.push(Math.random() < this.props.chanceLightStartsOn);
+    if (n === 2) {
+      for (let y = 0; y < 2; y++) {
+        let row = [];
+        for (let x = 0; x < 2; x++) {
+          row.push(Math.random() < this.props.chanceLightStartsOn);
+        }
+        board.push(row);
       }
-      board.push(row);
     }
+    if (n === 3) {
+      for (let y = 0; y < 3; y++) {
+        let row = [];
+        for (let x = 0; x < 3; x++) {
+          row.push(Math.random() < this.props.chanceLightStartsOn);
+        }
+        board.push(row);
+      }
+    }
+    if (n === 5) {
+      for (let y = 0; y < 5; y++) {
+        let row = [];
+        for (let x = 0; x < 5; x++) {
+          row.push(Math.random() < this.props.chanceLightStartsOn);
+        }
+        board.push(row);
+      }
+    }
+
     return board;
   }
 
   /** handle changing a cell: update board & determine if winner */
 
   flipCellsAround(coord) {
-    console.log("flipping", coord);
-
-    let { ncols, nrows } = this.props;
+    let level = this.state.level;
     let board = this.state.board;
     let [y, x] = coord.split("-").map(Number);
 
     function flipCell(y, x) {
       // if this coord is actually on board, flip it
 
-      if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+      if (x >= 0 && x < level && y >= 0 && y < level) {
         board[y][x] = !board[y][x];
       }
     }
@@ -86,9 +126,14 @@ class Board extends React.Component {
 
     // win when every cell is turned off
     // TODO: determine is the game has been won
+    console.log(board[0], coord);
     let hasWon = board.every(row => row.every(cell => !cell));
 
     this.setState({ board: board, hasWon: hasWon });
+  }
+
+  resetGame() {
+    window.location.reload();
   }
 
   /** Render game board or winning message. */
@@ -96,15 +141,24 @@ class Board extends React.Component {
   render() {
     if (this.state.hasWon) {
       return (
-        <div className="board-Title">
-          <div className="neon">You</div> <div className="flux">Win</div>
+        <div>
+          <div className="board-Title">
+            <div className="neon">You</div> <div className="flux">Win</div>
+          </div>
+          <div>
+            <button id="resetButton" className="neon" onClick={this.resetGame}>
+              {" "}
+              reset
+            </button>
+          </div>
         </div>
       );
     }
+
     let tblBoard = [];
-    for (let y = 0; y < this.props.nrows; y++) {
+    for (let y = 0; y < this.state.level; y++) {
       let row = [];
-      for (let x = 0; x < this.props.ncols; x++) {
+      for (let x = 0; x < this.state.level; x++) {
         let coord = `${y}-${x}`;
         row.push(
           <Cell
@@ -116,10 +170,23 @@ class Board extends React.Component {
       }
       tblBoard.push(<tr key={y}>{row}</tr>);
     }
+
     return (
       <div>
         <div className="board-Title">
           <div className="neon">Lights</div> <div className="flux">Out</div>
+        </div>
+
+        <div className="levels">
+          <button className="flux" onClick={this.easy}>
+            Easy
+          </button>
+          <button className="flux" onClick={this.med}>
+            Medium
+          </button>
+          <button className="flux" onClick={this.hard}>
+            Hard
+          </button>
         </div>
         <table className="Board">
           <tbody>{tblBoard}</tbody>
